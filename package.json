@@ -1,0 +1,14 @@
+{
+  "name": "evlador-ai",
+  "version": "1.0.0",
+  "description": "تحليل تشكيلات كرة القدم بالذكاء الاصطناعي",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.0.0",
+    "openai": "^6.0.0"
+  }
+}
