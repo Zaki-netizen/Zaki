@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EVLADOR - محلل التشكيلات</title>
+  <title>EVLADOR AI</title>
 
   <style>
     body {
@@ -11,16 +12,14 @@
       background: #111;
       color: white;
       text-align: center;
-      padding: 30px;
+      padding: 20px;
     }
 
-    h1 {
-      color: #00ff88;
-    }
+    h1 { color: #00ff88; }
 
     .box {
       max-width: 500px;
-      margin: auto;
+      margin: 20px auto;
       background: #222;
       padding: 20px;
       border-radius: 15px;
@@ -35,53 +34,73 @@
       background: #00ff88;
       color: #111;
       border: none;
-      padding: 12px 25px;
+      padding: 12px 20px;
       border-radius: 8px;
-      font-size: 18px;
+      font-size: 17px;
       cursor: pointer;
+      margin: 8px;
     }
 
-    #result {
+    .result {
       margin-top: 25px;
       text-align: right;
       white-space: pre-wrap;
       line-height: 1.8;
     }
+
+    h2 { color: #00ff88; }
   </style>
 </head>
 
 <body>
 
-  <h1>⚽ EVLADOR</h1>
-  <p>ارفع صورة تشكيلتك واحصل على تحليل بالذكاء الاصطناعي</p>
+  <h1>⚽ EVLADOR AI</h1>
+  <p>مساعدك الذكي في eFootball 2026</p>
 
   <div class="box">
-    <input type="file" id="imageInput" accept="image/*">
+    <h2>📋 تحليل التشكيلات</h2>
+    <p>ارفع صورة تشكيلتك للحصول على تحليل تكتيكي.</p>
 
-    <br>
+    <input type="file" id="imageInput" accept="image/*">
 
     <button onclick="analyzeImage()">حلل التشكيلة ⚽</button>
 
-    <div id="result"></div>
+    <div id="result" class="result"></div>
+  </div>
+
+  <div class="box">
+    <h2>🔥 تطوير اللاعبين</h2>
+    <p>ارفع صورة بطاقة اللاعب للحصول على اقتراح تطوير مناسب.</p>
+
+    <input type="file" id="playerInput" accept="image/*">
+
+    <button onclick="developPlayer()">حلل تطويرة اللاعب 🚀</button>
+
+    <div id="playerResult" class="result"></div>
   </div>
 
   <script>
-    async function analyzeImage() {
-      const input = document.getElementById("imageInput");
-      const result = document.getElementById("result");
+    async function sendImage(inputId, resultId, endpoint, loadingText) {
+      const input = document.getElementById(inputId);
+      const result = document.getElementById(resultId);
 
       if (!input.files[0]) {
         result.textContent = "⚠️ يرجى اختيار صورة أولاً.";
         return;
       }
 
-      result.textContent = "⏳ جاري تحليل التشكيلة...";
+      if (input.files[0].size > 12 * 1024 * 1024) {
+        result.textContent = "⚠️ الصورة كبيرة جداً. اختر صورة أصغر من 12MB.";
+        return;
+      }
+
+      result.textContent = loadingText;
 
       const reader = new FileReader();
 
       reader.onload = async function() {
         try {
-          const response = await fetch("/analyze", {
+          const response = await fetch(endpoint, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -93,17 +112,40 @@
 
           const data = await response.json();
 
-          if (data.result) {
-            result.textContent = data.result;
-          } else {
-            result.textContent = "حدث خطأ أثناء التحليل.";
+          if (!response.ok) {
+            result.textContent = data.error || "حدث خطأ أثناء التحليل.";
+            return;
           }
+
+          result.textContent = data.result || "لم تصل نتيجة التحليل.";
         } catch (error) {
           result.textContent = "تعذر الاتصال بالخادم.";
         }
       };
 
+      reader.onerror = function() {
+        result.textContent = "تعذرت قراءة الصورة.";
+      };
+
       reader.readAsDataURL(input.files[0]);
+    }
+
+    function analyzeImage() {
+      sendImage(
+        "imageInput",
+        "result",
+        "/analyze",
+        "⏳ جاري تحليل التشكيلة..."
+      );
+    }
+
+    function developPlayer() {
+      sendImage(
+        "playerInput",
+        "playerResult",
+        "/develop",
+        "⏳ جاري تحليل اللاعب واقتراح أفضل تطويرة..."
+      );
     }
   </script>
 
