@@ -48,7 +48,9 @@ app.post("/analyze", async (req, res) => {
     });
   }
 });
-
+app.get("/", (req, res) => {
+  res.send("مرحبًا! موقع EVLADOR يعمل بنجاح 🚀");
+});
 app.listen(3000, () => {
   console.log("الخادم يعمل!");
 });
