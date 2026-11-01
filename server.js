@@ -1,6 +1,6 @@
 const express = require("express");
 const OpenAI = require("openai");
-
+const path = require("path");
 const app = express();
 
 app.use(express.json({ limit: "20mb" }));
@@ -49,7 +49,7 @@ app.post("/analyze", async (req, res) => {
   }
 });
 app.get("/", (req, res) => {
-  res.send("مرحبًا! موقع EVLADOR يعمل بنجاح 🚀");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 app.listen(3000, () => {
   console.log("الخادم يعمل!");
