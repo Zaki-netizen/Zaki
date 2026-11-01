@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101020">
+<title>EVLADOR | عالم الألعاب</title>
+<style>
+:root {
+  --site-primary: #713cff;
+  --site-on-primary: #ffffff;
+  --site-secondary: #101020;
+  --site-on-secondary: #f8f7ff;
+  --site-background: #0b0b16;
+  --site-on-background: #f8f7ff;
+  --site-font-body: Tahoma, Arial, sans-serif;
+  --site-font-heading: Tahoma, Arial, sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --surface: #151528;
+  --surface-2: #1d1b36;
+  --muted: #aaa8c2;
+  --line: rgba(255,255,255,.1);
+  --cyan: #43e5ed;
+  --orange: #ff9c45;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--site-background); color: var(--site-on-background); font-family: var(--site-font-body); }
+#app { min-height: 100vh; width: 100%; border-radius: 0; overflow: hidden; background-color: var(--site-background); color: var(--site-on-background); position: relative; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+.container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+.topbar { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(16px); background: rgba(11,11,22,.82); border-bottom: 1px solid var(--line); }
+.nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: 1px; font-size: 22px; }
+.brand-mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(140deg,var(--site-primary),#b14dff); box-shadow: 0 8px 28px #713cff55; }
+.brand-mark svg { width: 23px; }
+.navlinks { display: flex; gap: 26px; color: var(--muted); font-size: 14px; }
+.navlinks a:hover { color: var(--cyan); }
+.nav-cta,.primary-btn { border: 0; border-radius: 12px; padding: 12px 19px; color: var(--site-on-primary); background: var(--site-primary); font-weight: 800; cursor: pointer; box-shadow: 0 8px 24px #713cff44; transition: transform .2s,filter .2s; }
+.nav-cta:hover,.primary-btn:hover { transform: translateY(-2px); filter: brightness(1.12); }
+.hero { position: relative; padding: 82px 0 78px; isolation: isolate; }
+.hero:before,.hero:after { content:""; position:absolute; z-index:-1; border-radius:50%; filter:blur(2px); opacity:var(--site-decoration-opacity); pointer-events:none; }
+.hero:before { width:440px;height:440px;left:-100px;top:-130px;background:radial-gradient(circle,#713cff35,transparent 68%); }
+.hero:after { width:360px;height:360px;right:-100px;bottom:-130px;background:radial-gradient(circle,#43e5ed20,transparent 70%); }
+.hero-grid { display:grid; grid-template-columns: 1.05fr .95fr; align-items:center; gap:50px; }
+.eyebrow { display:inline-flex;align-items:center;gap:9px;color:var(--cyan);font-size:13px;font-weight:800;letter-spacing:1px;background:#43e5ed12;border:1px solid #43e5ed35;padding:9px 13px;border-radius:99px; }
+.pulse { width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan); }
+h1 { font-family:var(--site-font-heading);font-size:clamp(42px,6vw,76px);line-height:1.08;margin:22px 0 18px;letter-spacing:-2px; }
+.gradient { background:linear-gradient(90deg,#b49aff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent; }
+.hero p { color:var(--muted);font-size:17px;line-height:1.95;max-width:550px;margin:0 0 28px; }
+.actions { display:flex;gap:12px;flex-wrap:wrap; }
+.secondary-btn { border:1px solid var(--line);border-radius:12px;padding:12px 19px;background:#ffffff08;color:var(--site-on-background);font-weight:800;cursor:pointer; }
+.secondary-btn:hover { border-color:var(--cyan); }
+.hero-art { min-height:390px;position:relative;display:grid;place-items:center; }
+.orbit { position:absolute;width:min(370px,85vw);aspect-ratio:1;border:1px solid #9b78ff55;border-radius:50%;box-shadow:0 0 70px #713cff22,inset 0 0 70px #713cff12;transform:rotate(-18deg); }
+.orbit:before,.orbit:after { content:"";position:absolute;border:1px solid #43e5ed55;border-radius:50%;inset:24px;transform:rotate(48deg); }
+.orbit:after { inset:52px;transform:rotate(-40deg);border-color:#ff9c4555; }
+.emblem { position:relative;width:230px;height:230px;border-radius:35% 35% 42% 42%;display:grid;place-items:center;background:linear-gradient(145deg,#8d5aff,#281b58 68%);box-shadow:0 25px 90px #713cff66,inset 0 1px 1px #ffffff77;transform:rotate(-7deg); }
+.emblem:before { content:"";position:absolute;inset:12px;border:2px solid #ffffff55;border-radius:inherit; }
+.emblem strong { font-size:53px;font-weight:1000;letter-spacing:-5px;text-shadow:0 5px 20px #120b30;transform:rotate(7deg); }
+.float-tag { position:absolute;padding:11px 15px;border:1px solid var(--line);background:#17162bdb;backdrop-filter:blur(12px);border-radius:14px;font-size:13px;font-weight:900;box-shadow:0 14px 35px #0005; }
+.tag-one { top:45px;right:0;color:var(--orange); }.tag-two { bottom:52px;left:0;color:var(--cyan); }
+.section { padding:66px 0; }
+.section-head { display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px; }
+.kicker { color:var(--cyan);font-size:12px;font-weight:900;letter-spacing:1.5px; }
+h2 { font-size:calc(32px * var(--site-heading-scale));margin:9px 0 0; }
+.section-head p { color:var(--muted);max-width:430px;line-height:1.8;margin:0; }
+.feature-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:18px; }
+.feature { position:relative;overflow:hidden;min-height:245px;padding:28px;border:1px solid var(--line);border-radius:calc(22px * var(--site-radius-scale));background:linear-gradient(135deg,var(--surface-2),var(--surface)); }
+.feature:after { content:"";position:absolute;width:220px;height:220px;border-radius:50%;left:-70px;bottom:-130px;background:var(--glow);opacity:.22;filter:blur(2px); }
+.feature-icon { width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:#ffffff12;font-size:27px;margin-bottom:24px; }
+.feature h3 { font-size:23px;margin:0 0 9px; }
+.feature p { color:var(--muted);line-height:1.8;margin:0;max-width:390px; }
+.feature small { display:inline-block;margin-top:18px;color:var(--cyan);font-weight:800; }
+.tactics-box { margin-top:20px;padding:24px;border:1px solid var(--line);border-radius:calc(22px * var(--site-radius-scale));background:var(--surface); }
+.upload-zone { margin:18px 0;padding:28px;border:2px dashed #43e5ed55;border-radius:18px;text-align:center;background:#43e5ed08;cursor:pointer; }
+.upload-zone:hover { border-color:var(--cyan); }
+.upload-zone input { display:none; }
+.preview-image { max-width:100%;max-height:320px;border-radius:14px;margin:14px auto 0;display:none;border:1px solid var(--line); }
+.tactics-actions { display:flex;gap:10px;flex-wrap:wrap;margin-top:14px; }
+.formation-result { color:var(--muted);line-height:1.9;padding:15px;border-radius:14px;background:#ffffff06; }
+.formation-result strong { color:var(--cyan); }
+.analysis-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px; }
+.analysis-card { padding:15px;border:1px solid var(--line);border-radius:14px;background:#ffffff05; }
+.analysis-card b { display:block;color:var(--cyan);margin-bottom:6px; }
+.analysis-card p { margin:0;color:var(--muted);font-size:14px;line-height:1.7; }
+.content-section { background:linear-gradient(180deg,transparent,#15152880,transparent); }
+.filters { display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px; }
+.filter { border:1px solid var(--line);background:#ffffff07;color:var(--muted);padding:9px 15px;border-radius:99px;cursor:pointer;font-size:13px; }
+.filter.active { color:white;background:var(--site-primary);border-color:var(--site-primary); }
+.content-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+.content-card { background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .2s,border-color .2s; }
+.content-card:hover { transform:translateY(-5px);border-color:#8e6bff88; }
+.thumb { height:145px;display:grid;place-items:center;font-size:52px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,var(--tint),#17162b 70%); }
+.thumb:after { content:"";position:absolute;width:150px;height:150px;border:1px solid #ffffff22;border-radius:50%;box-shadow:0 0 0 22px #ffffff08,0 0 0 45px #ffffff05; }
+.card-body { padding:17px; }.category { color:var(--cyan);font-size:11px;font-weight:900; }.card-body h3 { font-size:17px;margin:8px 0; }.card-body p { color:var(--muted);font-size:13px;line-height:1.7;margin:0; }
+.about { display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:center; }
+.about-box { border:1px solid var(--line);border-radius:22px;padding:28px;background:linear-gradient(145deg,#211b40,#111120); }
+.about-logo { font-size:42px;font-weight:1000;letter-spacing:-3px;color:#bca9ff; }
+.about-copy p { color:var(--muted);line-height:2;margin:12px 0 0; }
+.stats { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px; }
+.stat { padding:15px 10px;background:#ffffff08;border:1px solid var(--line);border-radius:13px;text-align:center; }.stat b { display:block;font-size:21px;color:var(--cyan); }.stat span { color:var(--muted);font-size:11px; }
+footer { border-top:1px solid var(--line);padding:27px 0;color:var(--muted);font-size:13px; }
+.footer-inner { display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap; }
+.toast { position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#24213d;border:1px solid #8d72ff;color:white;padding:12px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:40;box-shadow:0 10px 30px #0007; }.toast.show { opacity:1;transform:translate(-50%,0); }
+@media(max-width:760px) { .navlinks { display:none; }.hero { padding:58px 0 40px; }.hero-grid { grid-template-columns:1fr;gap:10px;text-align:center; }.hero p { margin-inline:auto; }.actions { justify-content:center; }.hero-art { min-height:310px; }.emblem { width:190px;height:190px; }.emblem strong { font-size:45px; }.orbit { width:290px; }.tag-one { right:4%; }.tag-two { left:4%; }.section { padding:48px 0; }.section-head { display:block; }.section-head p { margin-top:12px; }.feature-grid,.about { grid-template-columns:1fr; }.content-grid { grid-template-columns:1fr 1fr; }.analysis-grid { grid-template-columns:1fr; } }
+@media(max-width:450px) { .container { width:calc(100% - 28px); }.content-grid { grid-template-columns:1fr; }.content-card { display:grid;grid-template-columns:115px 1fr; }.thumb { height:100%;min-height:145px;font-size:40px; }.card-body { padding:14px; }.stats { gap:6px; }.stat b { font-size:18px; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar"><div class="container nav">
+    <a class="brand" href="#home"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19 12 4l7 15M8 14h8"/></svg></span> EVLADOR</a>
+    <nav class="navlinks"><a href="#home">الرئيسية</a><a href="#worlds">عوالمي</a><a href="#content">المحتوى</a><a href="#about">من أنا</a></nav>
+    <a class="nav-cta" href="#content">اكتشف المحتوى</a>
+  </div></header>
+  <main>
+    <section class="hero" id="home"><div class="container hero-grid">
+      <div>
+        <span class="eyebrow"><i class="pulse"></i> مرحبًا بك في عالمي</span>
+        <h1>أنا <span class="gradient">EVLADOR</span><br>وهنا تبدأ المتعة.</h1>
+        <p>عالم يجمع الحماس والتحدي — من ساحات Free Fire إلى متعة كرة القدم. اكتشف اهتماماتي ومحتواي في مكان واحد.</p>
+        <div class="actions"><a class="primary-btn" href="#worlds">ادخل إلى عالمي ←</a><a class="secondary-btn" href="#about">تعرّف عليّ</a></div>
+      </div>
+      <div class="hero-art" aria-label="شعار EVLADOR"><div class="orbit"></div><div class="emblem"><strong>EVL</strong></div><div class="float-tag tag-one">⚡ GAMING MODE</div><div class="float-tag tag-two">⚽ FOOTBALL ZONE</div></div>
+    </div></section>
+    <section class="section" id="worlds"><div class="container">
+      <div class="section-head"><div><span class="kicker">MY UNIVERSE</span><h2>عوالمي المفضّلة</h2></div><p>مساحتان مختلفتان، لكن يجمعهما الشغف والتنافس وصناعة اللحظات التي لا تُنسى.</p></div>
+      <div class="feature-grid">
+        <article class="feature" style="--glow:#8a55ff"><div class="feature-icon">🎮</div><h3>Free Fire</h3><p>لقطات حماسية، شخصيات وسكنات، أفكار وتحديات من عالم فري فاير.</p><small>GAMING • ACTION</small></article>
+        <article class="feature" style="--glow:#43e5ed"><div class="feature-icon">⚽</div><h3>كرة القدم</h3><p>نجوم اللعبة، المهارات، التشكيلات وأجواء المنافسة الكروية.</p><small>FOOTBALL • SKILLS</small></article>
+      </div>
+      <div class="tactics-box" id="tactics">
+        <span class="kicker">TACTICS ZONE</span>
+        <h2>اصنع خطتك التكتيكية</h2>
+        <p style="color:var(--muted);line-height:1.8">أرسل صورة تشكيلتك، ثم يحصل المستخدم على تحليل للتوزيع واقتراح أفضل أسلوب لعب وخطة مناسبة.</p>
+        <label class="upload-zone" for="formationImage"><strong>📷 اضغط لإرسال صورة التشكيلة</strong><br><span style="color:var(--muted);font-size:13px">اختر لقطة واضحة للملعب واللاعبين</span><input type="file" id="formationImage" accept="image/*"></label>
+        <img class="preview-image" id="formationPreview" alt="معاينة صورة التشكيلة">
+        <div class="tactics-actions"><button class="primary-btn" id="analyzeImage">حلّل التشكيلة بالذكاء الاصطناعي</button></div>
+        <div class="formation-result" id="formationResult">أرسل صورة تشكيلتك ثم اضغط على زر التحليل.</div>
+        <div class="analysis-grid" id="analysisDetails" hidden>
+          <div class="analysis-card"><b>🎯 الخطة المقترحة</b><p id="bestFormation">—</p></div>
+          <div class="analysis-card"><b>⚡ أسلوب اللعب</b><p id="playStyle">—</p></div>
+          <div class="analysis-card"><b>💪 نقاط القوة</b><p id="strengths">—</p></div>
+          <div class="analysis-card"><b>🔧 ما يحتاج تحسينًا</b><p id="improvements">—</p></div>
+        </div>
+      </div>
+    </div></section>
+    <section class="section content-section" id="content"><div class="container">
+      <div class="section-head"><div><span class="kicker">EXPLORE</span><h2>منطقة الاستكشاف</h2></div><p>اختر المجال الذي تحبّه لتظهر لك بطاقاته.</p></div>
+      <div class="filters" role="group" aria-label="تصفية المحتوى"><button class="filter active" data-filter="all">الكل</button><button class="filter" data-filter="gaming">Free Fire</button><button class="filter" data-filter="football">كرة القدم</button></div>
+      <div class="content-grid" id="contentGrid">
+        <article class="content-card" data-kind="gaming"><div class="thumb" style="--tint:#6334c8">🔥</div><div class="card-body"><span class="category">FREE FIRE</span><h3>عالم التحديات</h3><p>أفكار ومواجهات لعشاق الأكشن.</p></div></article>
+        <article class="content-card" data-kind="football"><div class="thumb" style="--tint:#176d75">⚽</div><div class="card-body"><span class="category">FOOTBALL</span><h3>مهارات النجوم</h3><p>استمتع بلمسات ومهارات كرة القدم.</p></div></article>
+        <article class="content-card" data-kind="gaming"><div class="thumb" style="--tint:#8a3d42">🏆</div><div class="card-body"><span class="category">GAMING</span><h3>طريق الفوز</h3><p>كل مباراة فرصة لتحدٍ جديد.</p></div></article>
+      </div>
+    </div></section>
+    <section class="section" id="about"><div class="container about">
+      <div class="about-box"><div class="about-logo">EVLADOR.</div><div style="color:var(--cyan);font-weight:800;margin-top:8px">PLAY • CREATE • REPEAT</div><div class="stats"><div class="stat"><b>02</b><span>اهتمامات رئيسية</span></div><div class="stat"><b>∞</b><span>أفكار جديدة</span></div><div class="stat"><b>100%</b><span>شغف</span></div></div></div>
+      <div class="about-copy"><span class="kicker">ABOUT THE CREATOR</span><h2>من هو EVLADOR؟</h2><p>أنا EVLADOR، أحب الألعاب وكرة القدم، وأطمح إلى مشاركة أفكاري وصناعة محتوى ممتع ومميز. هذا الموقع هو مساحتي الخاصة على الإنترنت — ويمكنك العودة إليه لاكتشاف الجديد.</p><button class="secondary-btn" id="copyName" style="margin-top:18px">انسخ اسم EVLADOR</button></div>
+    </div></section>
+  </main>
+  <footer><div class="container footer-inner"><span>© 2026 EVLADOR — جميع الحقوق محفوظة</span><span>صُنع بشغف 🎮</span></div></footer>
+  <div class="toast" id="toast" role="status">تم نسخ الاسم!</div>
+</div>
+<script>
+const filterButtons = document.querySelectorAll('.filter');
+const cards = document.querySelectorAll('.content-card');
+filterButtons.forEach(button => button.addEventListener('click', () => {
+  filterButtons.forEach(item => item.classList.remove('active'));
+  button.classList.add('active');
+  const choice = button.dataset.filter;
+  cards.forEach(card => { card.hidden = choice !== 'all' && card.dataset.kind !== choice; });
+}));
+document.getElementById('copyName').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText('EVLADOR'); }
+  catch (error) { const field = document.createElement('textarea'); field.value = 'EVLADOR'; document.body.appendChild(field); field.select(); document.execCommand('copy'); field.remove(); }
+  const toast = document.getElementById('toast'); toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1800);
+});
+let selectedFormationImage = false;
+document.getElementById('formationImage').addEventListener('change', event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  selectedFormationImage = true;
+  const preview = document.getElementById('formationPreview');
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = 'block';
+  document.getElementById('formationResult').textContent = 'تم إرسال الصورة. اضغط على زر التحليل لبدء تحليل التشكيلة.';
+});
+document.getElementById('analyzeImage').addEventListener('click', () => {
+  const result = document.getElementById('formationResult');
+  if (!selectedFormationImage) { result.textContent = 'اختر صورة التشكيلة أولًا.'; return; }
+  result.innerHTML = '<strong>نتيجة التحليل:</strong> بعد قراءة التشكيلة، ستظهر هنا توصية تكتيكية مخصصة.';
+  document.getElementById('analysisDetails').hidden = false;
+  document.getElementById('bestFormation').textContent = 'يُحدّدها الذكاء الاصطناعي حسب توزيع لاعبيك.';
+  document.getElementById('playStyle').textContent = 'اقتراح بين الاستحواذ، الضغط، الهجمات المرتدة أو اللعب عبر الأطراف.';
+  document.getElementById('strengths').textContent = 'يتم تحديد المناطق الأقوى في تشكيلتك بعد تحليل الصورة.';
+  document.getElementById('improvements').textContent = 'اقتراح تعديلات لتحسين التوازن بين الدفاع والوسط والهجوم.';
+});
+</script>
+</body>
+</html>
