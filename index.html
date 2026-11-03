@@ -95,6 +95,25 @@
   </div>
 
   <script>
+    function showPreview(inputId, previewId) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(previewId);
+
+  input.addEventListener("change", function() {
+    const file = input.files[0];
+
+    if (!file) {
+      preview.style.display = "none";
+      return;
+    }
+
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+  });
+}
+
+showPreview("imageInput", "previewTeam");
+showPreview("playerInput", "previewPlayer");
     async function sendImage(inputId, resultId, endpoint, loadingText) {
       const input = document.getElementById(inputId);
       const result = document.getElementById(resultId);
