@@ -69,6 +69,38 @@
     }
 
     h2 { color: #00ff88; }
+    body {
+  background: #080d0a;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(circle, #00ff88 1px, transparent 2px),
+    radial-gradient(circle, #00cc66 2px, transparent 3px),
+    radial-gradient(circle, #ffffff 1px, transparent 2px);
+  background-size: 75px 75px, 130px 130px, 180px 180px;
+  animation: greenParticles 25s linear infinite;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes greenParticles {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-100px, -150px);
+  }
+    }
   </style>
 </head>
 
