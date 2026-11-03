@@ -45,10 +45,31 @@
       border-radius: 15px;
     }
 
-    input {
-      margin: 20px 0;
-      width: 100%;
-    }
+    input[type="file"] {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+  padding: 15px;
+  background: #151d18;
+  border: 2px solid #00ff88;
+  border-radius: 12px;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+input[type="file"]::file-selector-button {
+  background: #00ff88;
+  color: #111;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: bold;
+  margin-left: 12px;
+  cursor: pointer;
+}
 
     button {
       background: #00ff88;
